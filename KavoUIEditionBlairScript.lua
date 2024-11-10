@@ -1,3 +1,6 @@
+local NotificationHolder = loadstring(game:HttpGet("https://raw.githubusercontent.com/BocusLuke/UI/main/STX/Module.Lua"))()
+local Notification = loadstring(game:HttpGet("https://raw.githubusercontent.com/BocusLuke/UI/main/STX/Client.Lua"))()
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
  TempTable = {}
  BempBable = {}
  LowestTempRoom = "Unknown"
@@ -48,6 +51,32 @@ end    end
  end
  return lowNum,val
  end
+
+
+--NOTIF SYSTEM
+function NotifyPlr(NotifType,TitleS,Desc,Color,TimeS,ImgClr,Img)
+if NotifType == "option" then
+Notification:Notify(
+    {Title = TitleS, Description = Desc},
+    {OutlineColor = Color,Time = TimeS, Type = "option"},
+    {Image = Img, ImageColor = ImgClr, Callback = function(State) print(tostring(State)) end}
+)
+elseif NotifyType == "image" then
+Notification:Notify(
+    {Title = TitleS, Description = Desc},
+    {OutlineColor = Color,Time = TimeS, Type = "image"},
+    {Image = Img, ImageColor = ImgClr}
+)
+else
+Notification:Notify(
+    {Title = TitleS, Description = Desc},
+    {OutlineColor = Color,Time = TimeS, Type = "default"}
+)
+end
+end
+--NOTIF SYSTEM END
+
+
  function DetTemp(s)
             nm = s.Parent.Parent.Name
             TempTable[s.Value] = s.Parent.Parent.Name
@@ -184,92 +213,47 @@ function GhAdd(vO)
        end
 workspace.Map.ChildAdded:Connect(GhAdd)
 
+local Window = Library.CreateLib("Blair Script [KAVO UI EDITION]", "Synapse")
+local EvTab = Window:NewTab("Check Evidences")
+local EvSec = EvTab:NewSection("Check Evidences")
 
-local Addon = {
-	Name = "Blairaddon", -- Addon Name (can't contain spaces)
-	Title = "Blair", -- Name for the groupbox
-	Description = "Blair", -- Can be empty if you don't want a description
-    Game = "*", -- * means all games
-	Elements = {
-        {
-			Type = "Button",
-			Name = "temp", -- Accessible by using Options[<AddonName>_<Name>]
-			Arguments = {
-				Text = 'Check Temp',
-				Tooltip = 'Checks lowest temp out of every room (basetemp)',
-				Func = function()
+getgenv().Toggled = false
+
+local toggle = EvSec:NewToggle("Ghost ESP", "Ghost ESP", (state)
+    getgenv().Toggled = state
+end)
+
+EvSec:NewButton("Check Temperature", "check temp all acros the building", function()
                     task.spawn(GetTemp)
-                    getgenv().Library:Notify("Detecting temperature, please wait...", 4)
-                    task.wait(3)
-                    getgenv().Library:Notify(strgPrt, 5)
-				end
-			},
-        },
-        {
-			Type = "Button",
-			Name = "uv", -- Accessible by using Options[<AddonName>_<Name>], for this element you can access it by Options["FunItems_Sverything"]
-			Arguments = {
-				Text = 'Check UV Evidence',
-				Tooltip = 'Notify yes if found',
-				Func = function()
-					getgenv().Library:Notify(uvsent..evles1..evles2..evAct, 5) -- getgenv, getrenv, getsenv, getfenv
-				end
-			},
-        },
-        {
-			Type = "Button",
-			Name = "Orb", -- Accessible by using Options[<AddonName>_<Name>], for this element you can access it by Options["FunItems_S
-			Arguments = {
-				Text = 'Check Orb',
-				Tooltip = 'Checks orb out of every room)',
-				Func = function()
+		    NotifyPlr("","Temperature Check","Temperature",Color3.new(0,1,0),3,"","")
+		    NotifyPlr("","Evidence Check","Detecting temperature",Color3.new(1,1,0),2.25,"","")
+                    task.wait(2)
+		    NotifyPlr("","Evidence Check",strgPrt,Color3.fromRGB(173, 216, 230),4.5,"","")
+                    --getgenv().Kavo:Notify(strgPrt, 5)
+	end)
+EvSec:NewButton("Check UV", "check UV all acros the building", function()
+	NotifyPlr("","Evidence Check",uvsent..evles1..evles2..evAct,Color3.new(0,1,0),3,"","")
+	--getgenv().Kavo:Notify(uvsent..evles1..evles2..evAct, 5) -- getgenv, getrenv, getsenv, getfenv
+	end)
+EvSec:NewButton("Check ORB", "check ORB all acros the building", function()
                     FindOrbAlt()
-					getgenv().Library:Notify(orbSent..evles1..evles2..evAct, 5) -- getgenv, getrenv, getsenv, getfenv
-				end
-			},
-        },
-        {
-			Type = "Button",
-			Name = "ChkGhstTp", -- Accessible by using Options[<AddonName>_<Name>], for this element you can access it by Options["FunItems_S
-			Arguments = {
-				Text = 'Check possible ghost types',
-				Tooltip = 'Checks possible ghost types ROBUX EDITION!!!',
-				Func = function()
-                    v1s = table.concat(UpdatedList, ", ")
-					getgenv().Library:Notify(v1s..evles1..evles2..evAct, 5) -- getgenv, getrenv, getsenv, getfenv
-				end
-			},
-        },
-        {
-            Type = "Toggle",
-            Name = "ImHigh", -- Accessible by using Options[<AddonName>_<Name>], for this element you can access it by Options["ToggleExample_ToggleExample"]
-            Arguments = {
-                Text = 'Ghost ESP',
-                Tooltip = 'tracks the ghost (If hunting), also tries to identifies ghost',
-                Default = false, -- Default value for the toggle
+		NotifyPlr("","Evidence Check",orbSent..evles1..evles2..evAct,Color3.new(0,1,0),3,"","")
+		--getgenv().Kavo:Notify(orbSent..evles1..evles2..evAct, 5) -- getgenv, getrenv, getsenv, getfenv
+	end)
 
-                Callback = function(value)
-                    repeat
-                        task.wait(1)
-                        if value == true then
-                            GESP = true
-                            if workspace:FindFirstChild("Ghost") ~= nil then
-                                GhostHL = workspace.Ghost
-                                --task.spawn(chkspd,GhostHL)
-                                GhostHL.Highlight.Enabled = true
-                                getgenv().Library:Notify(tostring(GhostHL.Humanoid.WalkSpeed),1)
-                            end
-                        else
-                        GESP = false
-                        end
-                    until value == false
-                end
-            },
-        }
-    }
-}
+game:GetService("RunService").RenderStepped:Connect(function()
+	if getgenv().Toggled then
+		GESP = getgenv().Toggled
+                        GhostHL = workspace.Ghost
+                        task.spawn(chkspd,GhostHL)
+                        GhostHL.Highlight.Enabled = true
+		         NotifyPlr("","Speed",tostring(GhostHL.Humanoid.WalkSpeed),Color3.new(1,0,0),0.8,"","")
+                        -- getgenv().Kavo:Notify(tostring(GhostHL.Humanoid.WalkSpeed),1)
+	else
+		GESP = getgenv().Toggled
+	end
+end)
 
-return Addon
 
 
 
