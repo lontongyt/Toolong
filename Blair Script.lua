@@ -1,4 +1,9 @@
- TempTable = {}
+--THIS IS INTENDED TO BE AN MSPAINT ADDON, IT WILL NOT WORK IF YOU EXECUTE THIS DIRECTLY TO YOUR EXECUTOR
+
+
+
+
+TempTable = {}
  BempBable = {}
  LowestTempRoom = "Unknown"
  MainTemp = 20
