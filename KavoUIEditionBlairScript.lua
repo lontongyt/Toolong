@@ -238,7 +238,6 @@ end)
 
 EvSec:NewButton("Check Temperature", "check temp all acros the building", function()
                     task.spawn(GetTemp)
-		    NotifyPlr("","Temperature Check","Temperature",Color3.new(0,1,0),3,"","")
 		    NotifyPlr("","Evidence Check","Detecting temperature",Color3.new(1,1,0),2.25,"","")
                     task.wait(2)
 		    NotifyPlr("","Evidence Check",strgPrt,Color3.fromRGB(173, 216, 230),4.5,"","")
