@@ -7,6 +7,7 @@ local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHept
  MainTemp = 20
  baseTemp = 20
  thebesda = 0
+removed = false
  orbFound = false
  UVFound = false
  uvsent = "UV Not found. Try using UV Light or glowsticks"
@@ -19,7 +20,8 @@ local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHept
  UpdatedList = {"Yama","Yurei","Revenant","Demon","Banshee","Shade","Spirit","Strigoi","Faejkur","Harrow","Wraith","Lament","Mare","Poltergeist","Nook","IRS"}
  Removeorbghost = {"Banshee","Demon","Faejkur","Revenant","Spirit","Yama","Yurei","IRS"}
  Removeuvghost = {"Demon","Faejkur","Lament","Mare","Nook","Shade","Wraith","Yama"}
- evles1 = ""
+ Removetempghost = {"Harrow","Lament","Poltergeist","Spirit","Strigoi","Shade"}
+evles1 = ""
  evles2 = ""
  evAct = ""
  if game.ReplicatedStorage.ActiveChallenges:FindFirstChild("evidencelessOne") ~= nil then
@@ -85,6 +87,14 @@ end
     BempBable[s.Parent.Value] = s.Parent.Name
     highestNumber = LowestNum(BempBable)
     strgPrt = ("LOW TEMP ROOM : "..va1.." BASETEMP : "..l1.." DETECTEDTEMP : "..lowNum)
+	if lownum < 0 and not removed and game.ReplicatedStorage.Weather.Value == "Default" then
+	removed = true
+		for _,NoGhosttempGhosts in pairs(Removetempghost) do
+    if table.find(UpdatedList,NoGhosttempGhosts) then
+        tempInd = table.find(UpdatedList,NoGhosttempGhosts)
+        table.remove(UpdatedList,tempInd)
+    end
+	end
     deb = false
     for i,v in pairs(workspace.Map.Zones:GetChildren()) do
     if v.Name == va1 then
@@ -93,6 +103,9 @@ end
  end
  end
 function CreateHighlight(inst)
+	if inst.Transparency == 1 then
+		inst.Reflectance = 99999999999999999999999999999999999999999999
+	end
     rizz = Instance.new("Highlight")
     rizz.Parent = inst
     rizz.DepthMode = "AlwaysOnTop"
