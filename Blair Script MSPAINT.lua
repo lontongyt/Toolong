@@ -1,6 +1,5 @@
---THIS IS INTENDED TO BE AN MSPAINT ADDON, IT WILL NOT WORK IF YOU EXECUTE THIS DIRECTLY TO YOUR EXECUTOR
-
-
+--Intended to be an MSPaint addon, will not work if directly executed
+--mspaint discord (expires in 22 November 2024) : https://discord.gg/8jPkaBcp
 
 
 TempTable = {}
@@ -21,9 +20,11 @@ TempTable = {}
  UpdatedList = {"Yama","Yurei","Revenant","Demon","Banshee","Shade","Spirit","Strigoi","Faejkur","Harrow","Wraith","Lament","Mare","Poltergeist","Nook","IRS"}
  Removeorbghost = {"Banshee","Demon","Faejkur","Revenant","Spirit","Yama","Yurei","IRS"}
  Removeuvghost = {"Demon","Faejkur","Lament","Mare","Nook","Shade","Wraith","Yama"}
+ Removetempghost = {"Harrow","Lament","Poltergeist","Revenant","Shade","Spirit","Strigoi"}
  evles1 = ""
  evles2 = ""
  evAct = ""
+ removed = false
  if game.ReplicatedStorage.ActiveChallenges:FindFirstChild("evidencelessOne") ~= nil then
 evles1 = " (-1"
 evAct = "Evidence active)"
@@ -61,14 +62,27 @@ end    end
     BempBable[s.Parent.Value] = s.Parent.Name
     highestNumber = LowestNum(BempBable)
     strgPrt = ("LOW TEMP ROOM : "..va1.." BASETEMP : "..l1.." DETECTEDTEMP : "..lowNum)
+    if lowNum < 0 and removed == false and game.ReplicatedStorage.Weather.Value == "Default" then
+        removed = true
+        for _,NoGhostTempGhosts in pairs(Removetempghost) do
+            if table.find(UpdatedList,NoGhostTempGhosts) then
+                TEMPIND = table.find(UpdatedList,NoGhostTempGhosts)
+                table.remove(UpdatedList,TEMPIND)
+            end
+            end
+    end
     deb = false
-    for i,v in pairs(workspace.Map.Zones:GetChildren()) do
+    HighRet = va1
+ --[[   for i,v in pairs(workspace.Map.Zones:GetChildren()) do
     if v.Name == va1 then
         CreateHighlight(v)
     end
+ end]]
  end
- end
-function CreateHighlight(inst)
+ function CreateHighlight(inst)
+    if inst.Transparency == 1 then
+	inst.Reflectance = 999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
+	end
     rizz = Instance.new("Highlight")
     rizz.Parent = inst
     rizz.DepthMode = "AlwaysOnTop"
@@ -207,6 +221,7 @@ local Addon = {
                     getgenv().Library:Notify("Detecting temperature, please wait...", 4)
                     task.wait(3)
                     getgenv().Library:Notify(strgPrt, 5)
+                    CreateHighlight(workspace.Map.Zones:FindFirstChild(HighRet))
 				end
 			},
         },
