@@ -1,3 +1,8 @@
+--Outdated
+
+
+
+
 local UIS = game:GetService("UserInputService")
 mod = {
 AmbushAlways = "Again & Again & Again", -- Againx3
