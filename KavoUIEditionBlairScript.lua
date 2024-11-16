@@ -42,6 +42,7 @@ end    end
  end
  RoomLow = "Russian Republic"
  strgPrt = "That is the lowest temp of the room, it might be not low but is because low is of the gost iding tere but yes bogst is veri skeri en is aihding dere"
+ 
  function LowestNum(thetab)
  deb = false
  lowNum = 100
@@ -63,7 +64,7 @@ Notification:Notify(
     {OutlineColor = Color,Time = TimeS, Type = "option"},
     {Image = Img, ImageColor = ImgClr, Callback = function(State) print(tostring(State)) end}
 )
-elseif NotifyType == "image" then
+elseif NotifType == "image" then
 Notification:Notify(
     {Title = TitleS, Description = Desc},
     {OutlineColor = Color,Time = TimeS, Type = "image"},
@@ -87,12 +88,13 @@ end
     BempBable[s.Parent.Value] = s.Parent.Name
     highestNumber = LowestNum(BempBable)
     strgPrt = ("LOW TEMP ROOM : "..va1.." BASETEMP : "..l1.." DETECTEDTEMP : "..lowNum)
-	if lownum < 0 and not removed and game.ReplicatedStorage.Weather.Value == "Default" then
+	if lowNum < 0 and not removed and game.ReplicatedStorage.Weather.Value == "Default" then
 	removed = true
 		for _,NoGhosttempGhosts in pairs(Removetempghost) do
     if table.find(UpdatedList,NoGhosttempGhosts) then
         tempInd = table.find(UpdatedList,NoGhosttempGhosts)
         table.remove(UpdatedList,tempInd)
+    end
     end
 	end
     deb = false
@@ -119,7 +121,7 @@ function CreateHighlight(inst)
     rizzTween.Completed:Wait()
     rizz:Destroy()
 end
- thebesda = thebesda + 1
+
  function UVFunc(pr)
 
     if pr.Parent.Name == "Prints" then
@@ -148,7 +150,7 @@ end
 
 
 function orbfunc(orbi)
-       if orbi:IsA("BasePart") and v.Name == "OrbPart" then
+       if orbi:IsA("BasePart") and orbi.Name == "OrbPart" then
     --print("ORB -- Evidence")
     orbFound = true
     orbSent = "Orb Evidence found"
@@ -232,8 +234,8 @@ local EvSec = EvTab:NewSection("Check Evidences")
 
 getgenv().Toggled = false
 
-local toggle = EvSec:NewToggle("Ghost ESP", "Ghost ESP", (state)
-    getgenv().Toggled = state
+local toggle = EvSec:NewToggle("Ghost ESP", "Ghost ESP", function(state)
+  getgenv().Toggled = state
 end)
 
 EvSec:NewButton("Check Temperature", "check temp all acros the building", function()
