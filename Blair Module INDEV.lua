@@ -23,6 +23,8 @@ Removetempghost = {"Harrow","Lament","Poltergeist","Spirit","Strigoi","Shade"}
 evles1 = ""
 evles2 = ""
 evAct = ""
+
+function BlairModule.CheckChallenges()
 if game.ReplicatedStorage.ActiveChallenges:FindFirstChild("evidencelessOne") ~= nil then
 evles1 = " (-1"
 evAct = "Evidence active)"
@@ -33,6 +35,10 @@ evAct = "Evidence active)"
 if game.ReplicatedStorage.ActiveChallenges:FindFirstChild("evidencelessOne") == nil then
 evles2 = " (-2"
 end    end
+return evles1,evles2,evAct
+end
+
+
 rizzCheck = math.random(1,5)
 if rizzCheck == 1 then
 rizz = true --does player has rizz?
@@ -97,7 +103,7 @@ function CreateHighlight(inst)
    rizzTween.Completed:Wait()
    rizz:Destroy()
 end
-
+--[[
 function UVFunc(pr)
 
    if pr.Parent.Name == "Prints" then
@@ -112,8 +118,22 @@ function UVFunc(pr)
        end
    end
    end
+]]
+function BlairModule.FindUVAlt()
 
-workspace.Map.Prints.ChildAdded:Connect(UVFunc)
+   if pr.Parent.Name == "Prints" then
+   --print("UV -- Evidence")
+   UVFound = true
+   uvsent = "UV Evidence found"
+   for _,NoGhostUVGhosts in pairs(Removeuvghost) do
+       if table.find(UpdatedList,NoGhostUVGhosts) then
+           UVIND = table.find(UpdatedList,NoGhostUVGhosts)
+           table.remove(UpdatedList,UVIND)
+       end
+       end
+      return uvsent
+   end
+   end
 
 
 
@@ -124,15 +144,15 @@ workspace.Map.Prints.ChildAdded:Connect(UVFunc)
    end
    workspace.Map.Prints.ChildAdded:Connect(GhRemv)
 
-
+--[[
 function orbfunc(orbi)
       if orbi:IsA("BasePart") and orbi.Name == "OrbPart" then
    --print("ORB -- Evidence")
    orbFound = true
    orbSent = "Orb Evidence found"
-   for _,NoGhostOrbsGhosts in pairs(Removeorbghost) do
+   for _,NoGhostOrbsGhosts in pairs(Removeorbghost) do 
    if table.find(UpdatedList,NoGhostOrbsGhosts) then
-       OrbInd = table.find(UpdatedList,NoGhostOrbsGhosts)
+       OrbInd = table.find(UpdatedList,NoGhostOrbsGhosts)            Not very useful
        table.remove(UpdatedList,OrbInd)
    end
    end
@@ -140,7 +160,7 @@ else
 FindOrbAlt()
 end
 end
-   workspace.Map.Orbs.ChildAdded:Connect(orbfunc) -- O MAI GOD ICH BIN STUPID
+   workspace.Map.Orbs.ChildAdded:Connect(orbfunc) -- ]] 
 
 function BlairModule.GetTemp()
 for i,v in pairs(workspace.Map.Zones:GetDescendants()) do
@@ -148,6 +168,7 @@ for i,v in pairs(workspace.Map.Zones:GetDescendants()) do
        DetTemp(v)
    end
    end
+return strgPrt
 end
 function BlairModule.chkspd(vs)
 
@@ -159,6 +180,12 @@ UpdatedList = {"Revenant"} --revenants speed up instantly and WAY FASTER, but is
 end
 end
 end
+
+
+function BlairModule.GetList()
+   return UpdatedList
+end
+
 
 --[[
 function nem(vg)
@@ -180,6 +207,8 @@ if workspace.Map.Orbs:FindFirstChild("OrbPart") ~= nil then
            table.remove(UpdatedList,OrbInd)
        end
        end
+return orbSent
+
 end
 end
 
@@ -192,8 +221,8 @@ SoundNew.Ended:Wait()
 SoundNew:Destroy()
 end
 
-function GhAdd(vO)
-   if vO.Name == "Ghost" and GESP then
+function BlairModule.GhAdd(gist)
+   if vO.Name == "Ghost" then
           if vO:FindFirstChild("Highlight") then
               CreateSound("4590662766")
               warn("Ghost spawned!")
@@ -203,6 +232,5 @@ function GhAdd(vO)
           end
       end
       end
-workspace.Map.ChildAdded:Connect(GhAdd)
 
 return BlairModule
