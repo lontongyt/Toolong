@@ -1,5 +1,5 @@
 --workspace.Map.ChildAdded:Connect(GhAdd)
-local BFunc = loadstring(game:HttpGet("https://raw.githubusercontent.com/lontongyt/Toolong/refs/heads/main/Blair%20Module%20INDEV.lua"))()
+local BFunc = loadstring(game:HttpGet("https://raw.githubusercontent.com/lontongyt/Toolong/refs/heads/main/ActiveBlairScript/Blair%20Module%20INDEV.lua"))()
 local NotificationHolder = loadstring(game:HttpGet("https://raw.githubusercontent.com/BocusLuke/UI/main/STX/Module.Lua"))()
 local Notification = loadstring(game:HttpGet("https://raw.githubusercontent.com/BocusLuke/UI/main/STX/Client.Lua"))()
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
@@ -62,7 +62,17 @@ EvSec:NewButton("Check ORB", "check ORB all acros the building", function()
 
 game:GetService("RunService").RenderStepped:Connect(function()
 	if getgenv().Toggled then
-			
+	if workspace:FindFirstChild("Ghost") then
+			local GhostMdl = workspace:FindFirstChild("Ghost")
+			task.spawn(BlairModule.chkspd,GhostMdl)
+			ChangedSpeed = BlairModule.spdchg(GhostMdl)
+			if ChangedSpeed ~= 0 then
+			NotifyPlr("","Speed",tostring(GhostMdl.Humanoid.WalkSpeed).." (SPEED CHANGE :"..ChangedSpeed.." )",Color3.new(1,0,0),0.8,"","")
+				else
+			NotifyPlr("","Speed",tostring(GhostMdl.Humanoid.WalkSpeed),Color3.new(1,0,0),0.8,"","")
+				end
+
+			end
 	else
 	end
 end)
