@@ -181,6 +181,13 @@ end
 end
 end
 
+function BlairModule.spdchg(ts)
+PSpeed = GSpeed
+GSpeed = ts.Humanoid.WalkSpeed
+RSpeed = GSpeed - PSpeed
+return RSpeed
+end
+
 
 function BlairModule.GetList()
    return UpdatedList
