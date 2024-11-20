@@ -45,6 +45,7 @@ end)
 EvSec:NewButton("Check Temperature", "check temp all acros the building", function()
 		    NotifyPlr("","Evidence Check","Detecting temperature",Color3.new(1,1,0),2.25,"","")
 		task.spawn(BFunc.GetTemp)
+		wait(math.random(1,9))
 		    NotifyPlr("","Evidence Check",strgPrt,Color3.fromRGB(173, 216, 230),4.5,"","")
                     --getgenv().Kavo:Notify(strgPrt, 5)
 	end)
@@ -60,7 +61,7 @@ EvSec:NewButton("Check ORB", "check ORB all acros the building", function()
 	end)
 debe = false
 game:GetService("RunService").RenderStepped:Connect(function()
-	if getgenv().Toggled then
+	if getgenv().Toggled and workspace:FindFirstChild("Ghost") and not debe then
 			if not debe then
 			debe = true
 				if workspace:FindFirstChild("Ghost") then
@@ -72,7 +73,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 				else
 			NotifyPlr("","Speed",tostring(GhostMdl.Humanoid.WalkSpeed),Color3.new(1,0,0),0.8,"","")
 				end
-								wait(0.85)
+								wait(1)
 					debe = false
 			end
 			else
