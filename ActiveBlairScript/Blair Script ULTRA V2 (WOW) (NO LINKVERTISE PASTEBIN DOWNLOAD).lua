@@ -31,7 +31,7 @@ end
 
 workspace.Map.Prints.ChildAdded:Connect(function()
 uvsent = "orb found"
-end
+end)
 
 
 local Window = Library.CreateLib("Blair Script [KAVO UI EDITION]", "Synapse")
