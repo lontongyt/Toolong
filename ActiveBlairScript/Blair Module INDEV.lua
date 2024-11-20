@@ -121,7 +121,7 @@ function UVFunc(pr)
 ]]
 function BlairModule.FindUVAlt()
    pr = workspace.Map.Prints
-if #pr:GetChildren()[1] then
+if pr:FindFirstChildWhichIsA("BasePart") then
    if pr.Parent.Name == "Prints" then
    --print("UV -- Evidence")
    UVFound = true
