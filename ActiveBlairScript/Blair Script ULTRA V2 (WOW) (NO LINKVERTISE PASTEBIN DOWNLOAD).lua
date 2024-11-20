@@ -3,7 +3,7 @@ local BFunc = loadstring(game:HttpGet("https://raw.githubusercontent.com/lontong
 local NotificationHolder = loadstring(game:HttpGet("https://raw.githubusercontent.com/BocusLuke/UI/main/STX/Module.Lua"))()
 local Notification = loadstring(game:HttpGet("https://raw.githubusercontent.com/BocusLuke/UI/main/STX/Client.Lua"))()
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
-
+RSpeed = 0 -- incase error
 evles1,evles2,evAct = BFunc.CheckChallenges()
 --NOTIF SYSTEM
 function NotifyPlr(NotifType,TitleS,Desc,Color,TimeS,ImgClr,Img)
@@ -29,7 +29,9 @@ end
 --NOTIF SYSTEM END
 
 
- 
+workspace.Map.Prints.ChildAdded:Connect(function()
+uvsent = "orb found"
+end
 
 
 local Window = Library.CreateLib("Blair Script [KAVO UI EDITION]", "Synapse")
@@ -66,10 +68,11 @@ game:GetService("RunService").RenderStepped:Connect(function()
 			debe = true
 				if workspace:FindFirstChild("Ghost") then
 			local GhostMdl = workspace:FindFirstChild("Ghost")
+			GhostMdl.Highlight.Enabled = true
 			task.spawn(BlairModule.chkspd,GhostMdl)
-			ChangedSpeed = BlairModule.spdchg(GhostMdl)
-			if ChangedSpeed ~= 0 then
-			NotifyPlr("","Speed",tostring(GhostMdl.Humanoid.WalkSpeed).." (SPEED CHANGE :"..ChangedSpeed.." )",Color3.new(1,0,0),0.8,"","")
+			BlairModule.spdchg(GhostMdl)
+			if RSpeed ~= 0 then
+			NotifyPlr("","Speed",tostring(GhostMdl.Humanoid.WalkSpeed).." (SPEED CHANGE :"..RSpeed.." )",Color3.new(1,0,0),0.8,"","")
 				else
 			NotifyPlr("","Speed",tostring(GhostMdl.Humanoid.WalkSpeed),Color3.new(1,0,0),0.8,"","")
 				end
