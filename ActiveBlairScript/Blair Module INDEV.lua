@@ -120,11 +120,13 @@ function UVFunc(pr)
    end
 ]]
 function BlairModule.FindUVAlt()
-
+   pr = workspace.Map.Prints
+if #pr:GetChildren()[1] then
    if pr.Parent.Name == "Prints" then
    --print("UV -- Evidence")
    UVFound = true
    uvsent = "UV Evidence found"
+      
    for _,NoGhostUVGhosts in pairs(Removeuvghost) do
        if table.find(UpdatedList,NoGhostUVGhosts) then
            UVIND = table.find(UpdatedList,NoGhostUVGhosts)
@@ -134,6 +136,7 @@ function BlairModule.FindUVAlt()
       return uvsent
    end
    end
+end
 
 
 
