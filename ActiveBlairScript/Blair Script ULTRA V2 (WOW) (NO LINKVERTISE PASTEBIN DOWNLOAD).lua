@@ -63,18 +63,20 @@ EvSec:NewButton("Check ORB", "check ORB all acros the building", function()
 	end)
 
 local Daggle = EvSec:NewToggle("Activate Night Vision Goggles", "Toggle is Space", function(state)
-  rizzasme = state
-end)
+game.Players.LocalPlayer.NightVision.Value = true
+game.Players.LocalPlayer.PlayerScripts.NightVisionHandler.Disabled = true
+		wait()
+	game.Players.LocalPlayer.PlayerScripts.NightVisionHandler.Disabled = false
+
+	end)
 debe = false
 
-
-
-game:GetService("RunService").RenderStepped:Connect(function()
+function yes()
 	if getgenv().Toggled and workspace:FindFirstChild("Ghost") and not debe then
 			if not debe then
 			debe = true
 				if workspace:FindFirstChild("Ghost") then
-			local GhostMdl = workspace:FindFirstChild("Ghost")
+			local GhostMdl = workspace:FinrdFirstChild("Ghost")
 			GhostMdl.Highlight.Enabled = true
 			task.spawn(BlairModule.chkspd,GhostMdl)
 			BlairModule.spdchg(GhostMdl)
@@ -90,6 +92,10 @@ game:GetService("RunService").RenderStepped:Connect(function()
 			end
 	else
 	end
+end
+
+game:GetService("RunService").RenderStepped:Connect(function()
+pcall(yes)
 end)
 
 
