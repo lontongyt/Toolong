@@ -88,14 +88,12 @@ game:GetService("RunService").RenderStepped:Connect(function()
 			NotifyPlr("","Speed",tostring(GhostMdl.Humanoid.WalkSpeed).." (SPEED CHANGE :"..RSpeed.." )",Color3.new(1,0,0),0.8,"","")
 				else
 			NotifyPlr("","Speed",tostring(GhostMdl.Humanoid.WalkSpeed),Color3.new(1,0,0),0.8,"","")
-				end
+				end 
 								wait(1)
 					
 			end
 			else
 			end
-	else
-	end
 			end)
 
 
