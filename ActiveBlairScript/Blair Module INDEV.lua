@@ -196,10 +196,10 @@ end
 function BlairModule.GetList()
    return UpdatedList
 end
-
+lightPar = game.Lighting
 nVisCol = Instance.new("ColorCorrectionEffect")
 nVisCol.Parent = lightPar
-nVisCol.Enabled = true
+nVisCol.Enabled = false
 --[[lightPar.Ambient = Color3.fromRGB(0, 0, 0)
 lightPar.OutdoorAmbient = Color3.fromRGB(86, 86, 86)
 lightPar.ExposureCompensation = 0.25 ]]
