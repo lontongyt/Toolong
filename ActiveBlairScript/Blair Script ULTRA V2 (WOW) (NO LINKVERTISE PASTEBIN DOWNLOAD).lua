@@ -77,7 +77,6 @@ debe = false
 game:GetService("RunService").RenderStepped:Connect(function()
 	if getgenv().Toggled and workspace:FindFirstChild("Ghost") then
 			
-				if workspace:FindFirstChild("Ghost") then
 			local GhostMdl = workspace:FindFirstChild("Ghost")
 			if GhostMdl:FindFirstChild("Highlight") then
 			GhostMdl.Highlight.Enabled = true
@@ -91,7 +90,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 				end 
 								wait(1)
 					
-			end
+			
 			else
 			end
 			end)
