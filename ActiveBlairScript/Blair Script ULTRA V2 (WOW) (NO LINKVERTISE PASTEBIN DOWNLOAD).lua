@@ -75,13 +75,13 @@ debe = false
 
 
 game:GetService("RunService").RenderStepped:Connect(function()
-pcall(function() 
-	if getgenv().Toggled and workspace:FindFirstChild("Ghost") and not debe then
-			if not debe then
-			debe = true
+	if getgenv().Toggled and workspace:FindFirstChild("Ghost") then
+			
 				if workspace:FindFirstChild("Ghost") then
 			local GhostMdl = workspace:FinrdFirstChild("Ghost")
+			if GhostMdl:FindFirstChild("Highlight") then
 			GhostMdl.Highlight.Enabled = true
+				end
 			task.spawn(BlairModule.chkspd,GhostMdl)
 			BlairModule.spdchg(GhostMdl)
 			if RSpeed ~= 0 then
@@ -90,13 +90,12 @@ pcall(function()
 			NotifyPlr("","Speed",tostring(GhostMdl.Humanoid.WalkSpeed),Color3.new(1,0,0),0.8,"","")
 				end
 								wait(1)
-					debe = false
+					
 			end
 			else
 			end
 	else
 	end
-end)
 			end)
 
 
