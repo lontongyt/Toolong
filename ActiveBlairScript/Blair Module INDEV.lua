@@ -62,30 +62,7 @@ end
 
 
 
-function DetTemp(s)
-           nm = s.Parent.Parent.Name
-           TempTable[s.Value] = s.Parent.Parent.Name
-           highestNumber = LowestNum(TempTable)
-   l1,va1 = lowNum,val
-   BempBable[s.Parent.Value] = s.Parent.Name
-   highestNumber = LowestNum(BempBable)
-   strgPrt = ("LOW TEMP ROOM : "..va1.." BASETEMP : "..l1.." DETECTEDTEMP : "..lowNum)
-   if lowNum < 0 and not removed and game.ReplicatedStorage.Weather.Value == "Default" then
-   removed = true
-       for _,NoGhosttempGhosts in pairs(Removetempghost) do
-   if table.find(UpdatedList,NoGhosttempGhosts) then
-       tempInd = table.find(UpdatedList,NoGhosttempGhosts)
-       table.remove(UpdatedList,tempInd)
-   end
-   end
-   end
-   deb = false
-   for i,v in pairs(workspace.Map.Zones:GetChildren()) do
-   if v.Name == va1 then
-       CreateHighlight(v)
-   end
-end
-end
+
 function CreateHighlight(inst)
    if inst.Transparency == 1 then
        inst.Reflectance = 99999999999999999999999999999999999999999999
@@ -164,6 +141,30 @@ FindOrbAlt()
 end
 end
    workspace.Map.Orbs.ChildAdded:Connect(orbfunc) -- ]] 
+function DetTemp(s)
+           nm = s.Parent.Parent.Name
+           TempTable[s.Value] = s.Parent.Parent.Name
+           highestNumber = LowestNum(TempTable)
+   l1,va1 = lowNum,val
+   BempBable[s.Parent.Value] = s.Parent.Name
+   highestNumber = LowestNum(BempBable)
+   strgPrt = ("LOW TEMP ROOM : "..va1.." BASETEMP : "..l1.." DETECTEDTEMP : "..lowNum)
+   if lowNum < 0 and not removed and game.ReplicatedStorage.Weather.Value == "Default" then
+   removed = true
+       for _,NoGhosttempGhosts in pairs(Removetempghost) do
+   if table.find(UpdatedList,NoGhosttempGhosts) then
+       tempInd = table.find(UpdatedList,NoGhosttempGhosts)
+       table.remove(UpdatedList,tempInd)
+   end
+   end
+   end
+   deb = false
+   for i,v in pairs(workspace.Map.Zones:GetChildren()) do
+   if v.Name == va1 then
+       CreateHighlight(v)
+   end
+end
+end
 
 function BlairModule.GetTemp()
 for i,v in pairs(workspace.Map.Zones:GetDescendants()) do
@@ -196,7 +197,35 @@ function BlairModule.GetList()
    return UpdatedList
 end
 
+nVisCol = Instance.new("ColorCorrectionEffect")
+nVisCol.Parent = lightPar
+nVisCol.Enabled = true
+--[[lightPar.Ambient = Color3.fromRGB(0, 0, 0)
+lightPar.OutdoorAmbient = Color3.fromRGB(86, 86, 86)
+lightPar.ExposureCompensation = 0.25 ]]
 
+function nVis(booleant)
+if booleant then
+    nVisCol.Enabled = true
+    game:GetService("TweenService"):Create(nVisCol, TweenInfo.new(0.25, Enum.EasingStyle.Linear), {Brightness = 0.25,Contrast = 0.1,Saturation = 0,TintColor = Color3.fromRGB(76, 255, 0)}):Play()
+else
+    game:GetService("TweenService"):Create(nVisCol, TweenInfo.new(0.25, Enum.EasingStyle.Linear), {Brightness = 0,Contrast = 0,Saturation = 0,TintColor = Color3.fromRGB(255, 255, 255)}):Play()
+task.wait(0.3)
+nVisCol.Enabled = false
+end
+end
+
+game:GetService("UserInputService").InputBegan:connect(function(input, rizzskibidi)
+if rizzasme then
+if input.KeyCode == Enum.KeyCode.Space then
+if not nVisEn then
+    nVis(true)
+else
+    nVis(false)
+end
+end
+end
+end)
 --[[
 function nem(vg)
 if vg.Name == "Ghost" then
