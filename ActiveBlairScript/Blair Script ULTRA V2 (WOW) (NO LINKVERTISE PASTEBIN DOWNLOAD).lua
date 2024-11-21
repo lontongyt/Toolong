@@ -62,7 +62,7 @@ EvSec:NewButton("Check ORB", "check ORB all acros the building", function()
 		--getgenv().Kavo:Notify(orbSent..evles1..evles2..evAct, 5) -- getgenv, getrenv, getsenv, getfenv
 	end)
 
-local toggle = EvSec:NewToggle("Activate Night Vision Goggles", "Toggle is Space", function(state)
+local Daggle = EvSec:NewToggle("Activate Night Vision Goggles", "Toggle is Space", function(state)
   rizzasme = state
 end)
 debe = false
@@ -371,14 +371,13 @@ function reqrelimg()
          pcall(function()
             ids = Random.new():NextNumber(1,100000000000) -- i can't keep track of how many decal assets are there now
             id = math.floor(ids + 0.5)
-            print(id)
+            
             Asset = game.MarketplaceService:GetProductInfo(id)
-            print(tostring(Asset.AssetTypeId))
             if Asset.AssetTypeId==1 then freerobux = true local MPICount = MPICount + 1 end 
         end)
         if freerobux then table.insert(MarketPlaceImages,tostring(id)) --[[filling ram process has started.. maybe not]] 
          end
-         print(MPICount)
+         
     until MPICount == 1000  
 end
 task.spawn(reqrelimg)
