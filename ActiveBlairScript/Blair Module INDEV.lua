@@ -218,7 +218,7 @@ end
 game:GetService("UserInputService").InputBegan:connect(function(input, rizzskibidi)
 if rizzasme then
 if input.KeyCode == Enum.KeyCode.Space then
-if not nVisEn then
+if not nVisCol.Enabled then
     nVis(true)
 else
     nVis(false)
