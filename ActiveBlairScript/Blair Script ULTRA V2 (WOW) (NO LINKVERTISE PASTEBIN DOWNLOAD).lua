@@ -61,7 +61,14 @@ EvSec:NewButton("Check ORB", "check ORB all acros the building", function()
 		NotifyPlr("","Evidence Check",orbSent..evles1..evles2..evAct,Color3.new(0,1,0),3,"","")
 		--getgenv().Kavo:Notify(orbSent..evles1..evles2..evAct, 5) -- getgenv, getrenv, getsenv, getfenv
 	end)
+
+local toggle = EvSec:NewToggle("Activate Night Vision Goggles", "Toggle is Space", function(state)
+  rizzasme = state
+end)
 debe = false
+
+
+
 game:GetService("RunService").RenderStepped:Connect(function()
 	if getgenv().Toggled and workspace:FindFirstChild("Ghost") and not debe then
 			if not debe then
