@@ -63,15 +63,19 @@ EvSec:NewButton("Check ORB", "check ORB all acros the building", function()
 	end)
 
 local Daggle = EvSec:NewToggle("Activate Night Vision Goggles", "Toggle is Space", function(state)
+if not game.ReplicatedStorage.IsBloodMoon.Value then
 game.Players.LocalPlayer.NightVision.Value = true
 game.Players.LocalPlayer.PlayerScripts.NightVisionHandler.Disabled = true
 		wait()
 	game.Players.LocalPlayer.PlayerScripts.NightVisionHandler.Disabled = false
-
+		end
 	end)
 debe = false
 
-function yes()
+
+
+game:GetService("RunService").RenderStepped:Connect(function()
+pcall(function() 
 	if getgenv().Toggled and workspace:FindFirstChild("Ghost") and not debe then
 			if not debe then
 			debe = true
@@ -92,11 +96,8 @@ function yes()
 			end
 	else
 	end
-end
-
-game:GetService("RunService").RenderStepped:Connect(function()
-pcall(yes)
 end)
+			end)
 
 
 
