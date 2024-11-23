@@ -75,8 +75,8 @@ debe = false
 
 
 game:GetService("RunService").RenderStepped:Connect(function()
-	if getgenv().Toggled and workspace:FindFirstChild("Ghost") then
-			
+	if getgenv().Toggled and workspace:FindFirstChild("Ghost") and not debe then
+			debe = true
 			local GhostMdl = workspace:FindFirstChild("Ghost")
 			if GhostMdl:FindFirstChild("Highlight") then
 			GhostMdl.Highlight.Enabled = true
@@ -89,6 +89,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 			NotifyPlr("","Speed",tostring(GhostMdl.Humanoid.WalkSpeed),Color3.new(1,0,0),0.8,"","")
 				end 
 								wait(1)
+			debe = false
 					
 			
 			else
