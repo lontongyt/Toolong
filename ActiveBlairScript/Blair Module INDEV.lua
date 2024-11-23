@@ -80,7 +80,7 @@ function CreateHighlight(inst)
    rizzTween.Completed:Wait()
    rizz:Destroy()
 end
---[[
+
 function UVFunc(pr)
 
    if pr.Parent.Name == "Prints" then
@@ -95,7 +95,8 @@ function UVFunc(pr)
        end
    end
    end
-]]
+workspace.Map.Prints.ChildAdded:Connect(UVFunc)
+
 function BlairModule.FindUVAlt()
    pr = workspace.Map.Prints
 if pr:FindFirstChildWhichIsA("BasePart") then
@@ -121,8 +122,7 @@ end
        if vOS.Name == "Ghost" then
            GhostHL = nil
        end
-   end
-   workspace.Map.Prints.ChildAdded:Connect(GhRemv)
+   end 
 
 --[[
 function orbfunc(orbi)
@@ -140,7 +140,7 @@ else
 FindOrbAlt()
 end
 end
-   workspace.Map.Orbs.ChildAdded:Connect(orbfunc) -- ]] 
+   workspace.Map.Orbs.ChildAdded:Connect(orbfunc) ]]
 function DetTemp(s)
            nm = s.Parent.Parent.Name
            TempTable[s.Value] = s.Parent.Parent.Name
@@ -194,6 +194,7 @@ function BlairModule.spdchg(ts)
 PSpeed = GSpeed
 GSpeed = ts.Humanoid.WalkSpeed
 RSpeed = GSpeed - PSpeed
+print("Previous Speed: "..PSpeed.." Current Speed : "..GSpeed.." Returned Speed : "..RSpeed
 return RSpeed
 end
 
@@ -209,28 +210,7 @@ nVisCol.Enabled = false
 lightPar.OutdoorAmbient = Color3.fromRGB(86, 86, 86)
 lightPar.ExposureCompensation = 0.25 ]]
 
-function nVis(booleant)
-if booleant then
-    nVisCol.Enabled = true
-    game:GetService("TweenService"):Create(nVisCol, TweenInfo.new(0.25, Enum.EasingStyle.Linear), {Brightness = 0.25,Contrast = 0.1,Saturation = 0,TintColor = Color3.fromRGB(76, 255, 0)}):Play()
-else
-    game:GetService("TweenService"):Create(nVisCol, TweenInfo.new(0.25, Enum.EasingStyle.Linear), {Brightness = 0,Contrast = 0,Saturation = 0,TintColor = Color3.fromRGB(255, 255, 255)}):Play()
-task.wait(0.3)
-nVisCol.Enabled = false
-end
-end
 
-game:GetService("UserInputService").InputBegan:connect(function(input, rizzskibidi)
-if rizzasme then
-if input.KeyCode == Enum.KeyCode.Space then
-if not nVisCol.Enabled then
-    nVis(true)
-else
-    nVis(false)
-end
-end
-end
-end)
 --[[
 function nem(vg)
 if vg.Name == "Ghost" then
