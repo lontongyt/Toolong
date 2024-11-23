@@ -167,12 +167,17 @@ end
 end
 
 function BlairModule.GetTemp()
+if game.ReplicatedStorage.Weather.Value ~= "Snow" then
 for i,v in pairs(workspace.Map.Zones:GetDescendants()) do
        if v:IsA("NumberValue") and v.Name == "_____LocalBaseTemp" then
        DetTemp(v)
    end
    end
 return strgPrt
+   else
+   strgPrt = "Temperature check unreliable, Weather is cold."
+      return strgPrt
+   end
 end
 function BlairModule.chkspd(vs)
 
