@@ -194,7 +194,7 @@ function BlairModule.spdchg(ts)
 PSpeed = GSpeed
 GSpeed = ts.Humanoid.WalkSpeed
 RSpeed = GSpeed - PSpeed
-print("Previous Speed: "..PSpeed.." Current Speed : "..GSpeed.." Returned Speed : "..RSpeed
+print("Previous Speed: "..PSpeed.." Current Speed : "..GSpeed.." Returned Speed : "..RSpeed)
 return RSpeed
 end
 
