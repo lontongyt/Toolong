@@ -82,7 +82,10 @@ game:GetService("RunService").RenderStepped:Connect(function()
 			GhostMdl.Highlight.Enabled = true
 				end
 			task.spawn(BlairModule.chkspd,GhostMdl)
-			task.spawn(BlairModule.spdchg,GhostMdl)
+			PSpeed = GSpeed
+GSpeed = GhostMdl.Humanoid.WalkSpeed
+RSpeed = GSpeed - PSpeed
+print("Previous Speed: "..PSpeed.." Current Speed : "..GSpeed.." Returned Speed : "..RSpeed)
 			if RSpeed ~= 0 then
 			NotifyPlr("","Speed",tostring(GhostMdl.Humanoid.WalkSpeed).." (SPEED CHANGE :"..RSpeed.." )",Color3.new(1,0,0),0.8,"","")
 				else
