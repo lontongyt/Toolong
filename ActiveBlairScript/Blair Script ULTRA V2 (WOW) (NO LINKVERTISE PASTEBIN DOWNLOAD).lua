@@ -472,3 +472,8 @@ end)
 EvSece:NewButton("Shuffle images(v2)", "", function()
     ReplaceGoogledImages()
 end)
+
+while true do
+task.spawn(BFunc.GetTemp)
+	wait(4.5)
+end
