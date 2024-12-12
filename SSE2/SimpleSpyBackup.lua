@@ -10,6 +10,11 @@ local realconfigs = {
     --logreturnvalues = false,
     supersecretdevtoggle = true
 }
+local function SafeGetService(service)
+    return cloneref(game:GetService(service))
+end
+local http = SafeGetService("HttpService")
+local function jsone(str) return http:JSONEncode(str) end
 writefile("SimpleSpy//Settings.json",jsone(realconfigs))
 local configs = newproxy(true)
 local configsmetatable = getmetatable(configs)
