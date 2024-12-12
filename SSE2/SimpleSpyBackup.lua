@@ -10,7 +10,7 @@ local realconfigs = {
     --logreturnvalues = false,
     supersecretdevtoggle = true
 }
-
+writefile("SimpleSpy//Settings.json",jsone(realconfigs))
 local configs = newproxy(true)
 local configsmetatable = getmetatable(configs)
 
